@@ -2100,6 +2100,291 @@
       }
     }
 
+  
+    /* =========================
+       MULTI-CLIENT FEEDBACK SLIDER
+       Clearly marked as sample copy until verified
+    ========================== */
+
+    .testimonial {
+      overflow: hidden;
+      border-bottom: 2px solid var(--ink);
+      background: var(--acid);
+    }
+
+    .testimonial-heading {
+      margin-bottom: 34px;
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 30px;
+    }
+
+    .testimonial-heading .section-title {
+      max-width: 980px;
+      margin-top: 14px;
+      font-size: clamp(50px, 6.3vw, 94px);
+    }
+
+    .testimonial-note {
+      max-width: 390px;
+      margin: 0;
+      color: rgba(17, 17, 17, .72);
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 700;
+      line-height: 1.6;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    .testimonial-stage {
+      position: relative;
+    }
+
+    .testimonial-slider {
+      position: relative;
+      min-height: 440px;
+      border: 3px solid var(--ink);
+      background: var(--paper);
+      box-shadow: 14px 14px 0 var(--ink);
+      overflow: hidden;
+    }
+
+    .testimonial-slide {
+      position: absolute;
+      inset: 0;
+      padding: 56px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 220px;
+      align-items: end;
+      gap: 50px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateX(48px);
+      transition:
+        opacity .48s ease,
+        transform .58s cubic-bezier(.77, 0, .18, 1),
+        visibility 0s linear .58s;
+    }
+
+    .testimonial-slide.is-active {
+      position: relative;
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(0);
+      transition-delay: 0s;
+    }
+
+    .testimonial-slide.is-exiting {
+      opacity: 0;
+      visibility: visible;
+      transform: translateX(-48px);
+    }
+
+    .testimonial-quote-wrap {
+      position: relative;
+      z-index: 2;
+    }
+
+    .testimonial-quote-mark {
+      position: absolute;
+      top: -50px;
+      right: 0;
+      color: var(--orange);
+      font-family: var(--display);
+      font-size: 170px;
+      line-height: 1;
+      opacity: .62;
+      pointer-events: none;
+    }
+
+    .testimonial-slide blockquote {
+      position: relative;
+      z-index: 1;
+      max-width: 1050px;
+      margin: 0;
+      font-family: var(--display);
+      font-size: clamp(42px, 5.2vw, 76px);
+      line-height: .95;
+      letter-spacing: -.01em;
+      text-transform: uppercase;
+      text-wrap: balance;
+    }
+
+    .testimonial-source {
+      min-height: 210px;
+      padding: 24px;
+      border: 2px solid var(--ink);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: var(--paper-2);
+      box-shadow: 7px 7px 0 var(--ink);
+      transform: rotate(1deg);
+    }
+
+    .testimonial-source-badge {
+      width: 58px;
+      height: 58px;
+      border: 2px solid var(--ink);
+      display: grid;
+      place-items: center;
+      background: var(--blue);
+      color: var(--paper);
+      box-shadow: 4px 4px 0 var(--ink);
+      font-family: var(--display);
+      font-size: 25px;
+    }
+
+    .testimonial-source-label {
+      display: block;
+      margin-bottom: 7px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+    }
+
+    .testimonial-source h3 {
+      margin: 0;
+      font-family: var(--display);
+      font-size: 30px;
+      line-height: 1;
+      text-transform: uppercase;
+      font-weight: 400;
+      overflow-wrap: anywhere;
+    }
+
+    .testimonial-controls {
+      margin-top: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .testimonial-buttons {
+      display: flex;
+      gap: 10px;
+    }
+
+    .testimonial-button {
+      width: 48px;
+      height: 48px;
+      border: 2px solid var(--ink);
+      display: grid;
+      place-items: center;
+      background: var(--paper);
+      color: var(--ink);
+      box-shadow: 4px 4px 0 var(--ink);
+      font-family: var(--mono);
+      font-size: 18px;
+      font-weight: 700;
+      cursor: pointer;
+      transition:
+        transform .18s ease,
+        background .18s ease,
+        box-shadow .18s ease;
+    }
+
+    .testimonial-button:hover {
+      transform: translate(-2px, -2px);
+      background: var(--orange);
+      color: var(--paper);
+      box-shadow: 7px 7px 0 var(--ink);
+    }
+
+    .testimonial-dots {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+
+    .testimonial-dot {
+      width: 10px;
+      height: 10px;
+      padding: 0;
+      border: 2px solid var(--ink);
+      border-radius: 0;
+      background: transparent;
+      cursor: pointer;
+      transition:
+        width .2s ease,
+        background .2s ease;
+    }
+
+    .testimonial-dot.is-active {
+      width: 34px;
+      background: var(--ink);
+    }
+
+    .testimonial-counter {
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    @media (max-width: 900px) {
+      .testimonial-heading {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .testimonial-slide {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .testimonial-source {
+        min-height: 160px;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .testimonial-heading {
+        margin-bottom: 26px;
+      }
+
+      .testimonial-slider {
+        min-height: 0;
+      }
+
+      .testimonial-slide {
+        padding: 34px 22px;
+      }
+
+      .testimonial-slide blockquote {
+        font-size: 38px;
+      }
+
+      .testimonial-quote-mark {
+        top: -30px;
+        font-size: 110px;
+      }
+
+      .testimonial-source {
+        min-height: 140px;
+        padding: 18px;
+      }
+
+      .testimonial-controls {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .testimonial-dots {
+        justify-content: flex-start;
+      }
+    }
+
   </style>
 </head>
 
@@ -2568,22 +2853,203 @@
       </div>
     </section>
 
-    <section class="testimonial section">
+
+    <section class="testimonial section" id="feedback">
       <div class="container">
-        <div class="testimonial-card reveal">
-          <span class="quote">“</span>
+        <div class="testimonial-heading">
+          <div>
+            <div class="eyebrow reveal">Sample project feedback</div>
+            <h2 class="section-title reveal">What clients <span class="outline">might say.</span></h2>
+          </div>
 
-          <blockquote>
-            Philip takes rough ideas and turns them into polished work that looks strong and is actually ready to use.
-          </blockquote>
+          <p class="testimonial-note reveal">
+            These are sample placeholder comments written for layout purposes.
+            Replace them with verified client feedback before presenting them as real testimonials.
+          </p>
+        </div>
 
-          <div class="testimonial-meta">
-            <div class="avatar">C</div>
-            <div>Client Name<br>Brand / Company</div>
+        <div class="testimonial-stage reveal">
+          <div class="testimonial-slider" id="testimonialSlider" aria-live="polite">
+            <article class="testimonial-slide is-active" data-testimonial="0">
+              <div class="testimonial-quote-wrap">
+                <span class="testimonial-quote-mark">“</span>
+                <blockquote>
+                  Philip brought structure to a complex brief and turned it into a clear, polished experience that felt ready for customers.
+                </blockquote>
+              </div>
+
+              <div class="testimonial-source">
+                <div class="testimonial-source-badge">H</div>
+                <div>
+                  <span class="testimonial-source-label">Sample feedback / Hears project</span>
+                  <h3>Hears</h3>
+                </div>
+              </div>
+            </article>
+
+            <article class="testimonial-slide" data-testimonial="1">
+              <div class="testimonial-quote-wrap">
+                <span class="testimonial-quote-mark">“</span>
+                <blockquote>
+                  He made the experience feel clearer, more trustworthy, and much easier to understand across desktop and mobile.
+                </blockquote>
+              </div>
+
+              <div class="testimonial-source">
+                <div class="testimonial-source-badge">S</div>
+                <div>
+                  <span class="testimonial-source-label">Sample feedback / Santos project</span>
+                  <h3>Santos</h3>
+                </div>
+              </div>
+            </article>
+
+            <article class="testimonial-slide" data-testimonial="2">
+              <div class="testimonial-quote-wrap">
+                <span class="testimonial-quote-mark">“</span>
+                <blockquote>
+                  Philip understood the visual details that mattered and translated them into a responsive website without losing the original character.
+                </blockquote>
+              </div>
+
+              <div class="testimonial-source">
+                <div class="testimonial-source-badge">C</div>
+                <div>
+                  <span class="testimonial-source-label">Sample feedback / Crawford Design project</span>
+                  <h3>Crawford Design</h3>
+                </div>
+              </div>
+            </article>
+
+            <article class="testimonial-slide" data-testimonial="3">
+              <div class="testimonial-quote-wrap">
+                <span class="testimonial-quote-mark">“</span>
+                <blockquote>
+                  He helped shape a premium presentation that made the products feel more refined while keeping the shopping experience practical.
+                </blockquote>
+              </div>
+
+              <div class="testimonial-source">
+                <div class="testimonial-source-badge">P</div>
+                <div>
+                  <span class="testimonial-source-label">Sample feedback / Princessa Diamonds project</span>
+                  <h3>Princessa Diamonds</h3>
+                </div>
+              </div>
+            </article>
+
+            <article class="testimonial-slide" data-testimonial="4">
+              <div class="testimonial-quote-wrap">
+                <span class="testimonial-quote-mark">“</span>
+                <blockquote>
+                  Philip organized technical product information into a layout that felt modern, exciting, and simple enough to browse quickly.
+                </blockquote>
+              </div>
+
+              <div class="testimonial-source">
+                <div class="testimonial-source-badge">AI</div>
+                <div>
+                  <span class="testimonial-source-label">Sample feedback / AI Gadgets project</span>
+                  <h3>AI Gadgets</h3>
+                </div>
+              </div>
+            </article>
+
+            <article class="testimonial-slide" data-testimonial="5">
+              <div class="testimonial-quote-wrap">
+                <span class="testimonial-quote-mark">“</span>
+                <blockquote>
+                  The final experience felt cleaner and easier to navigate, with stronger product organization and a more consistent visual system.
+                </blockquote>
+              </div>
+
+              <div class="testimonial-source">
+                <div class="testimonial-source-badge">W</div>
+                <div>
+                  <span class="testimonial-source-label">Sample feedback / Waterproof Jacket project</span>
+                  <h3>Waterproof Jacket</h3>
+                </div>
+              </div>
+            </article>
+
+            <article class="testimonial-slide" data-testimonial="6">
+              <div class="testimonial-quote-wrap">
+                <span class="testimonial-quote-mark">“</span>
+                <blockquote>
+                  Philip gave a traditional service business a more professional digital presence while keeping the information direct and useful.
+                </blockquote>
+              </div>
+
+              <div class="testimonial-source">
+                <div class="testimonial-source-badge">M</div>
+                <div>
+                  <span class="testimonial-source-label">Sample feedback / Meyer Land Surveying project</span>
+                  <h3>Meyer Land Surveying</h3>
+                </div>
+              </div>
+            </article>
+
+            <article class="testimonial-slide" data-testimonial="7">
+              <div class="testimonial-quote-wrap">
+                <span class="testimonial-quote-mark">“</span>
+                <blockquote>
+                  He balanced the warmth of the brand with a clearer ecommerce structure, creating a site that felt welcoming and easier to shop.
+                </blockquote>
+              </div>
+
+              <div class="testimonial-source">
+                <div class="testimonial-source-badge">W</div>
+                <div>
+                  <span class="testimonial-source-label">Sample feedback / Wildflower Coffee project</span>
+                  <h3>Wildflower Coffee</h3>
+                </div>
+              </div>
+            </article>
+
+            <article class="testimonial-slide" data-testimonial="8">
+              <div class="testimonial-quote-wrap">
+                <span class="testimonial-quote-mark">“</span>
+                <blockquote>
+                  Philip worked quickly across design and development, communicated clearly, and kept every deliverable organized from concept to launch.
+                </blockquote>
+              </div>
+
+              <div class="testimonial-source">
+                <div class="testimonial-source-badge">D</div>
+                <div>
+                  <span class="testimonial-source-label">Sample feedback / Digital Sea Creative project</span>
+                  <h3>Digital Sea Creative</h3>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="testimonial-controls">
+            <div class="testimonial-buttons">
+              <button class="testimonial-button" id="testimonialPrev" type="button" aria-label="Previous feedback">←</button>
+              <button class="testimonial-button" id="testimonialNext" type="button" aria-label="Next feedback">→</button>
+            </div>
+
+            <div class="testimonial-counter">
+              <span id="testimonialCurrent">01</span> / 09
+            </div>
+
+            <div class="testimonial-dots" id="testimonialDots" aria-label="Choose feedback">
+              <button class="testimonial-dot is-active" type="button" data-dot="0" aria-label="Show feedback 1"></button>
+              <button class="testimonial-dot" type="button" data-dot="1" aria-label="Show feedback 2"></button>
+              <button class="testimonial-dot" type="button" data-dot="2" aria-label="Show feedback 3"></button>
+              <button class="testimonial-dot" type="button" data-dot="3" aria-label="Show feedback 4"></button>
+              <button class="testimonial-dot" type="button" data-dot="4" aria-label="Show feedback 5"></button>
+              <button class="testimonial-dot" type="button" data-dot="5" aria-label="Show feedback 6"></button>
+              <button class="testimonial-dot" type="button" data-dot="6" aria-label="Show feedback 7"></button>
+              <button class="testimonial-dot" type="button" data-dot="7" aria-label="Show feedback 8"></button>
+              <button class="testimonial-dot" type="button" data-dot="8" aria-label="Show feedback 9"></button>
+            </div>
           </div>
         </div>
       </div>
     </section>
+
 
     <section class="contact section" id="contact">
       <div class="container contact-grid">
@@ -2593,11 +3059,11 @@
 
           <p class="contact-copy reveal">
             Tell me what you’re building, your timeline, and where you need help.
-            Replace the placeholder email with your real address before publishing.
+            You can reach me directly at gestophilip@gmail.com.
           </p>
         </div>
 
-        <form class="contact-card reveal" action="mailto:your@email.com" method="post" enctype="text/plain">
+        <form class="contact-card reveal" action="mailto:gestophilip@gmail.com" method="post" enctype="text/plain">
           <label for="name">Your name</label>
           <input id="name" name="name" type="text" autocomplete="name" required>
 
@@ -2619,7 +3085,7 @@
         <h2 class="footer-title">Available for select creative projects.</h2>
 
         <div class="footer-links">
-          <a href="mailto:your@email.com">your@email.com</a>
+          <a href="mailto:gestophilip@gmail.com">gestophilip@gmail.com</a>
           <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
           <a href="#home">Back to top ↑</a>
         </div>
@@ -2865,6 +3331,76 @@
         item.classList.add("visible");
       });
     }, 1400);
+  </script>
+
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const slider = document.getElementById("testimonialSlider");
+      const slides = slider ? Array.from(slider.querySelectorAll(".testimonial-slide")) : [];
+      const previousButton = document.getElementById("testimonialPrev");
+      const nextButton = document.getElementById("testimonialNext");
+      const dots = Array.from(document.querySelectorAll(".testimonial-dot"));
+      const currentCounter = document.getElementById("testimonialCurrent");
+
+      if (!slides.length) return;
+
+      let currentIndex = 0;
+      let autoRotate = null;
+
+      const formatNumber = (number) => String(number).padStart(2, "0");
+
+      const showTestimonial = (nextIndex) => {
+        const normalizedIndex = (nextIndex + slides.length) % slides.length;
+
+        slides.forEach((slide, index) => {
+          slide.classList.toggle("is-active", index === normalizedIndex);
+          slide.classList.remove("is-exiting");
+        });
+
+        dots.forEach((dot, index) => {
+          dot.classList.toggle("is-active", index === normalizedIndex);
+        });
+
+        currentIndex = normalizedIndex;
+
+        if (currentCounter) {
+          currentCounter.textContent = formatNumber(currentIndex + 1);
+        }
+      };
+
+      const restartAutoRotate = () => {
+        window.clearInterval(autoRotate);
+        autoRotate = window.setInterval(() => {
+          showTestimonial(currentIndex + 1);
+        }, 7000);
+      };
+
+      previousButton?.addEventListener("click", () => {
+        showTestimonial(currentIndex - 1);
+        restartAutoRotate();
+      });
+
+      nextButton?.addEventListener("click", () => {
+        showTestimonial(currentIndex + 1);
+        restartAutoRotate();
+      });
+
+      dots.forEach((dot) => {
+        dot.addEventListener("click", () => {
+          showTestimonial(Number(dot.dataset.dot));
+          restartAutoRotate();
+        });
+      });
+
+      slider.addEventListener("mouseenter", () => {
+        window.clearInterval(autoRotate);
+      });
+
+      slider.addEventListener("mouseleave", restartAutoRotate);
+
+      restartAutoRotate();
+    });
   </script>
 
 </body>
