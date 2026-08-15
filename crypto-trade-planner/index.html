@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Crypto Risk Desk</title>
+<style>
+:root{--bg:#07100d;--p:#0d1814;--p2:#101f19;--line:#23352e;--text:#f1f5f2;--muted:#94a39b;--good:#55d889;--bad:#ff7272;--warn:#f2c66d;--accent:#8de8b1}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 20% 0,#10291f 0,#07100d 34%,#050b09 100%);color:var(--text);font:14px/1.45 Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}.wrap{max-width:1380px;margin:auto;padding:22px}.top{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:16px}.brand{display:flex;align-items:center;gap:12px}.mark{width:44px;height:44px;border:1px solid #335548;border-radius:13px;display:grid;place-items:center;background:#0b1511;color:var(--accent);font-weight:900}h1{margin:0;font-size:20px}.sub,.note{color:var(--muted);font-size:12px}.pill{padding:8px 11px;border:1px solid var(--line);border-radius:999px;color:var(--muted);background:#0a1410}.notice{border:1px solid #4f4322;background:#18150d;color:#e9d69d;padding:12px 14px;border-radius:12px;margin-bottom:14px}.grid{display:grid;grid-template-columns:1fr 1fr .9fr;gap:14px}.card{background:linear-gradient(180deg,rgba(16,31,25,.97),rgba(10,20,16,.97));border:1px solid var(--line);border-radius:16px;padding:16px}.wide{grid-column:1/-1}.section{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:11px}.kicker{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}h2{font-size:14px;margin:0}.fields{display:grid;grid-template-columns:1fr 1fr;gap:9px}.field{display:flex;flex-direction:column;gap:5px}.full{grid-column:1/-1}label{font-size:11px;color:#adbbb4}.input{display:flex;align-items:center;border:1px solid #2b4137;background:#09130f;border-radius:10px;overflow:hidden}.input:focus-within{border-color:#4d816a}input,select{width:100%;border:0;outline:0;background:transparent;color:var(--text);padding:10px 11px;font:inherit}option{background:#101b17}.suffix{padding:0 10px;color:var(--muted);white-space:nowrap;font-size:12px}.seg{display:grid;grid-template-columns:1fr 1fr;gap:5px;background:#09120f;border:1px solid var(--line);border-radius:11px;padding:4px}.seg button{border:0;border-radius:8px;padding:9px;background:transparent;color:var(--muted);font-weight:800;cursor:pointer}.seg .long.active{background:#143222;color:#78e4a1}.seg .short.active{background:#351919;color:#ff9292}.btn{border:1px solid #37664f;background:linear-gradient(180deg,#1c4a32,#153724);color:#eafff2;border-radius:10px;padding:10px 12px;font-weight:800;cursor:pointer}.btn.danger{background:#331717;border-color:#613131;color:#ffd1d1}.btn.secondary{background:#101b17;border-color:#2c4138;color:#d8e5de}.calc{width:100%;margin-top:11px;padding:12px}.checklist{display:grid;gap:7px}.check{display:flex;gap:8px;align-items:flex-start;padding:9px;border:1px solid var(--line);background:#0a1511;border-radius:10px}.check input{width:auto;margin-top:3px}.check b{font-size:12px}.check small{display:block;color:var(--muted)}.scorebar{height:8px;border-radius:999px;background:#17241e;overflow:hidden;margin:9px 0 4px}.scorebar div{height:100%;background:linear-gradient(90deg,#ef7474,#e9c76c,#62d98f);width:0}.scoreline{display:flex;justify-content:space-between;color:var(--muted);font-size:11px}.status{padding:13px;border:1px solid var(--line);border-radius:12px;margin-bottom:11px}.status.good{background:#0e2518;border-color:#27593b}.status.warn{background:#231e0e;border-color:#594a20}.status.bad{background:#2a1111;border-color:#663030}.status strong{font-size:17px}.status div{color:#b7c5be;font-size:12px;margin-top:3px}.metrics{display:grid;grid-template-columns:1fr 1fr;gap:8px}.metric{border:1px solid var(--line);background:#0a1511;border-radius:11px;padding:10px}.metric span{display:block;color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:.07em}.metric b{font-size:16px}.good b{color:var(--good)}.bad b{color:var(--bad)}.warn b{color:var(--warn)}.rules{margin-top:10px;padding:10px;border:1px dashed #30483e;border-radius:10px;color:#b4c0ba;font-size:12px}.journal-form{display:grid;grid-template-columns:1fr 1fr 1fr 1fr 1.4fr auto;gap:8px;align-items:end}.actions{display:flex;gap:8px;flex-wrap:wrap}.table-wrap{overflow:auto;margin-top:10px}table{width:100%;border-collapse:collapse;min-width:850px}th,td{text-align:left;padding:8px;border-bottom:1px solid #1f3129;font-size:12px}th{color:#93a29a;font-size:10px;text-transform:uppercase}.pos{color:var(--good)}.neg{color:var(--bad)}.foot{color:#738279;font-size:11px;padding:15px 2px}.save-note{margin-top:8px;padding:9px;border:1px solid var(--line);border-radius:9px;color:var(--muted);font-size:11px}@media(max-width:1050px){.grid{grid-template-columns:1fr 1fr}.behavior{grid-column:1/-1}}@media(max-width:760px){.wrap{padding:12px}.top{align-items:flex-start;flex-direction:column}.grid,.fields,.metrics{grid-template-columns:1fr}.journal-form{grid-template-columns:1fr 1fr}.pill.top-pill{display:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="top"><div class="brand"><div class="mark">R</div><div><h1>Crypto Risk Desk</h1><div class="sub">8AM momentum planner • breakout → pullback → confirmation • risk first</div></div></div><div class="pill top-pill">Planning tool • no automatic orders • no guaranteed signals</div></div>
+<div class="notice"><b>Recovery rule:</b> past losses never increase today's position size. The dashboard sizes each setup from your current balance, stop distance, risk limit and capital/leverage cap.</div>
+<div class="grid">
+<section class="card">
+<div class="section"><div><div class="kicker">Step 1</div><h2>Setup & Price Structure</h2></div><div class="pill" id="dirBadge">LONG bias</div></div>
+<div class="field" style="margin-bottom:9px"><label>Direction</label><div class="seg"><button id="longBtn" class="long active">LONG</button><button id="shortBtn" class="short">SHORT</button></div></div>
+<div class="fields">
+<div class="field"><label>Pair</label><div class="input"><input id="symbol" value="BTCUSDT"></div></div>
+<div class="field"><label>Daily open</label><div class="input"><input id="dailyOpen" type="number" step="any" placeholder="65000"></div></div>
+<div class="field"><label>First 15m high</label><div class="input"><input id="orHigh" type="number" step="any" placeholder="65300"></div></div>
+<div class="field"><label>First 15m low</label><div class="input"><input id="orLow" type="number" step="any" placeholder="64850"></div></div>
+<div class="field"><label>Pullback / retest</label><div class="input"><input id="pullback" type="number" step="any" placeholder="65300"></div></div>
+<div class="field"><label>Pullback extreme / invalidation</label><div class="input"><input id="pullbackExtreme" type="number" step="any" placeholder="65100"></div></div>
+<div class="field"><label>Confirmation buffer</label><div class="input"><input id="confirmBuffer" type="number" value="0.05" step="0.01"><span class="suffix">%</span></div></div>
+<div class="field"><label>Stop buffer</label><div class="input"><input id="stopBuffer" type="number" value="0.05" step="0.01"><span class="suffix">%</span></div></div>
+<div class="field"><label>Retest tolerance</label><div class="input"><input id="retestTolerance" type="number" value="0.30" step="0.05"><span class="suffix">%</span></div></div>
+<div class="field"><label>Reward : risk target</label><div class="input"><input id="rr" type="number" value="2" step="0.25"><span class="suffix">R</span></div></div>
+<div class="field full"><label>Trending coin extension beyond breakout</label><div class="input"><input id="extension" type="number" value="0" step="0.1"><span class="suffix">%</span></div><div class="note">A large extension triggers a chase/FOMO warning.</div></div>
+</div>
+</section>
+<section class="card">
+<div class="section"><div><div class="kicker">Step 2</div><h2>Capital, Risk & Leverage</h2></div></div>
+<div class="fields">
+<div class="field"><label>Total account balance</label><div class="input"><span class="suffix">₱</span><input id="balance" type="number" value="60000"></div></div>
+<div class="field"><label>Trading capital available</label><div class="input"><span class="suffix">₱</span><input id="tradeCapital" type="number" value="15000"></div></div>
+<div class="field"><label>Risk per trade</label><div class="input"><input id="riskPct" type="number" value="0.25" step="0.05"><span class="suffix">%</span></div></div>
+<div class="field"><label>Daily max loss</label><div class="input"><input id="dailyRiskPct" type="number" value="0.50" step="0.05"><span class="suffix">%</span></div></div>
+<div class="field"><label>Today's realized P&L</label><div class="input"><span class="suffix">₱</span><input id="todayPnl" type="number" value="0" step="1"></div></div>
+<div class="field"><label>Leverage cap</label><div class="input"><input id="leverage" type="number" value="3" min="1" step="1"><span class="suffix">×</span></div></div>
+<div class="field"><label>Estimated round-trip fees</label><div class="input"><input id="feePct" type="number" value="0.12" step="0.01"><span class="suffix">%</span></div></div>
+</div>
+<button class="btn calc" id="calcBtn">CALCULATE TRADE PLAN</button>
+<div class="rules"><b>Position sizing order:</b> allowed peso risk → stop distance → required exposure → cap by available capital × leverage. Leverage is not a profit target.</div>
+</section>
+<section class="card behavior">
+<div class="section"><div><div class="kicker">Step 3</div><h2>Behavior Gate</h2></div><span id="scoreText">0%</span></div>
+<div class="checklist">
+<label class="check"><input class="beh goodCheck" type="checkbox"><span><b>I waited for the opening range / setup.</b><small>I did not enter just because the candle changed color.</small></span></label>
+<label class="check"><input class="beh goodCheck" type="checkbox"><span><b>A pullback/retest actually happened.</b><small>Trending means watchlist first, not instant market buy.</small></span></label>
+<label class="check"><input class="beh goodCheck" type="checkbox"><span><b>I know the invalidation before entry.</b><small>The stop is based on structure, not emotion.</small></span></label>
+<label class="check"><input class="beh goodCheck" type="checkbox"><span><b>I accept the planned loss.</b><small>I will not move the stop farther away.</small></span></label>
+<label class="check"><input class="beh goodCheck" type="checkbox"><span><b>This is within my daily loss limit.</b><small>I am still allowed to trade today.</small></span></label>
+<label class="check"><input id="recoverLoss" class="beh dangerCheck" type="checkbox"><span><b>I am trying to recover a previous loss.</b><small>Checked = warning / no-trade condition.</small></span></label>
+<label class="check"><input id="fomo" class="beh dangerCheck" type="checkbox"><span><b>I feel FOMO, revenge or urgency.</b><small>Checked = warning / no-trade condition.</small></span></label>
+</div>
+<div class="scorebar"><div id="scoreFill"></div></div><div class="scoreline"><span>Rule-following score</span><span>Target: 80%+</span></div>
+</section>
+<section class="card wide">
+<div class="section"><div><div class="kicker">Result</div><h2>Trade Plan</h2></div><span class="note" id="stamp">Not calculated</span></div>
+<div class="status warn" id="status"><strong>WAITING FOR INPUT</strong><div>Fill the setup and run the calculator.</div></div>
+<div class="metrics">
+<div class="metric"><span>Mechanical entry trigger</span><b id="mEntry">—</b></div>
+<div class="metric"><span>Retest zone</span><b id="mRetest">—</b></div>
+<div class="metric bad"><span>Stop</span><b id="mStop">—</b></div>
+<div class="metric good"><span>Target</span><b id="mTarget">—</b></div>
+<div class="metric warn"><span>Planned peso risk</span><b id="mRiskPeso">—</b></div>
+<div class="metric"><span>Stop distance</span><b id="mStopPct">—</b></div>
+<div class="metric"><span>Position exposure</span><b id="mExposure">—</b></div>
+<div class="metric"><span>Margin / money to put</span><b id="mMargin">—</b></div>
+<div class="metric"><span>Effective leverage</span><b id="mEffLev">—</b></div>
+<div class="metric"><span>Approx. quantity</span><b id="mQty">—</b></div>
+<div class="metric good"><span>Gross target P&L</span><b id="mGross">—</b></div>
+<div class="metric warn"><span>Estimated fees</span><b id="mFees">—</b></div>
+<div class="metric good"><span>Estimated net target P&L</span><b id="mNet">—</b></div>
+<div class="metric bad"><span>Daily max loss</span><b id="mDaily">—</b></div>
+</div>
+<div class="rules" id="explain">The calculator is a rules-and-risk tool. A “ready” result does not mean the market will move in your favor.</div>
+</section>
+<section class="card wide">
+<div class="section"><div><div class="kicker">Journal</div><h2>Trade Log</h2></div><div class="actions"><button class="btn secondary" id="exportBackup">Export backup</button><button class="btn secondary" id="importBackup">Import backup</button><input id="importFile" type="file" accept="application/json,.json" hidden><button class="btn danger" id="clearJournal">Clear journal</button></div></div>
+<div class="journal-form">
+<div class="field"><label>Pair</label><div class="input"><input id="jSymbol" placeholder="BTCUSDT"></div></div>
+<div class="field"><label>Direction</label><div class="input"><select id="jDirection"><option>LONG</option><option>SHORT</option></select></div></div>
+<div class="field"><label>P&L</label><div class="input"><span class="suffix">₱</span><input id="jPnl" type="number" step="any"></div></div>
+<div class="field"><label>Grade</label><div class="input"><select id="jGrade"><option>GOOD TRADE</option><option>BAD TRADE</option><option>NO TRADE</option></select></div></div>
+<div class="field"><label>Notes</label><div class="input"><input id="jNotes" placeholder="Breakout + retest; followed stop"></div></div>
+<button class="btn" id="addTrade">ADD</button>
+</div>
+<div class="table-wrap"><table><thead><tr><th>Date</th><th>Pair</th><th>Direction</th><th>P&L</th><th>Grade</th><th>Notes</th><th></th></tr></thead><tbody id="journalBody"></tbody></table></div>
+<div class="save-note" id="journalStats">No trades logged yet.</div>
+<div class="save-note"><b>Saving:</b> GitHub Pages makes this website available on any computer, but journal data is stored by the browser. Use <b>Export backup</b> on one computer and <b>Import backup</b> on another. Automatic cross-device synchronization requires a separate cloud database/login.</div>
+</section>
+</div>
+<div class="foot">Educational planning and journaling only. This page does not place orders, calculate exchange-specific liquidation prices, or guarantee a profitable setup. Verify fees, margin mode, position size, stops and exchange rules before trading.</div>
+</div>
+<script>
+let direction='LONG';const $=id=>document.getElementById(id),num=id=>parseFloat($(id).value);const php=n=>Number.isFinite(n)?'₱'+n.toLocaleString('en-PH',{maximumFractionDigits:2}):'—';const px=n=>Number.isFinite(n)?n.toLocaleString(undefined,{maximumFractionDigits:8}):'—';
+const JKEY='crypto-risk-desk-journal-v2',SKEY='crypto-risk-desk-settings-v2';
+function setDirection(d){direction=d;$('longBtn').className='long'+(d==='LONG'?' active':'');$('shortBtn').className='short'+(d==='SHORT'?' active':'');$('dirBadge').textContent=d+' bias';saveSettings()}
+$('longBtn').onclick=()=>setDirection('LONG');$('shortBtn').onclick=()=>setDirection('SHORT');
+function behavior(){const g=[...document.querySelectorAll('.goodCheck')],checked=g.filter(x=>x.checked).length,d=[...document.querySelectorAll('.dangerCheck')].filter(x=>x.checked).length,score=Math.round(checked/g.length*100);return{score,d}}
+function updateBehavior(){const x=behavior();$('scoreText').textContent=x.score+'%';$('scoreFill').style.width=x.score+'%';saveSettings()}
+document.querySelectorAll('.beh').forEach(x=>x.addEventListener('change',updateBehavior));
+function status(kind,title,why){const s=$('status');s.className='status '+kind;s.innerHTML='<strong>'+title+'</strong><div>'+why+'</div>'}
+function calculate(){const daily=num('dailyOpen'),hi=num('orHigh'),lo=num('orLow'),pull=num('pullback'),extreme=num('pullbackExtreme'),cb=num('confirmBuffer')/100,sb=num('stopBuffer')/100,tol=num('retestTolerance')/100,rr=num('rr'),bal=num('balance'),cap=num('tradeCapital'),risk=num('riskPct')/100,dayRisk=num('dailyRiskPct')/100,today=num('todayPnl'),lev=Math.max(1,num('leverage')),fee=num('feePct')/100,extension=num('extension');const vals=[daily,hi,lo,pull,extreme,cb,sb,tol,rr,bal,cap,risk,dayRisk,today,lev,fee,extension];if(vals.some(v=>!Number.isFinite(v))||hi<=lo||bal<=0||cap<=0||rr<=0||risk<=0){status('bad','INPUT ERROR','Check all numeric fields and make sure the opening-range high is above the low.');return}const breakout=direction==='LONG'?hi:lo,entry=direction==='LONG'?breakout*(1+cb):breakout*(1-cb),stop=direction==='LONG'?extreme*(1-sb):extreme*(1+sb);if((direction==='LONG'&&stop>=entry)||(direction==='SHORT'&&stop<=entry)){status('bad','INVALID STOP','For a long the stop must be below entry; for a short it must be above entry.');return}const dist=Math.abs(entry-stop),stopPct=dist/entry,allowed=bal*risk,raw=allowed/stopPct,maxExposure=cap*lev,exposure=Math.min(raw,maxExposure),actual=exposure*stopPct,margin=exposure/lev,qty=exposure/entry,target=direction==='LONG'?entry+dist*rr:entry-dist*rr,gross=actual*rr,fees=exposure*fee,net=gross-fees,eff=exposure/cap,dayMax=bal*dayRisk,zoneLow=breakout*(1-tol),zoneHigh=breakout*(1+tol),pullOk=pull>=zoneLow&&pull<=zoneHigh,bias=direction==='LONG'?entry>daily:entry<daily,{score,d}=behavior();let problems=[];if(!pullOk)problems.push('pullback is outside the retest zone');if(!bias)problems.push('direction conflicts with the daily-open bias');if(extension>=1.5)problems.push('coin is already extended '+extension.toFixed(1)+'% — chase risk');if(d)problems.push('FOMO/recovery behavior is checked');if(score<80)problems.push('behavior score is below 80%');if(risk>0.01)problems.push('risk per trade is above 1%');if(lev>10)problems.push('leverage cap is above 10×');if(today<=-dayMax)problems.push('daily loss limit has already been reached');if(actual<allowed*.95)problems.push('capital/leverage cap reduces the position below full risk allowance');$('mEntry').textContent=px(entry);$('mRetest').textContent=px(zoneLow)+' – '+px(zoneHigh);$('mStop').textContent=px(stop);$('mTarget').textContent=px(target);$('mRiskPeso').textContent=php(actual)+' ('+(actual/bal*100).toFixed(2)+'%)';$('mStopPct').textContent=(stopPct*100).toFixed(3)+'%';$('mExposure').textContent=php(exposure);$('mMargin').textContent=php(margin);$('mEffLev').textContent=eff.toFixed(2)+'×';$('mQty').textContent=qty.toFixed(8)+' '+$('symbol').value.replace('USDT','');$('mGross').textContent=php(gross);$('mFees').textContent=php(fees);$('mNet').textContent=php(net);$('mDaily').textContent=php(dayMax)+' ('+(dayRisk*100).toFixed(2)+'%)';$('stamp').textContent=new Date().toLocaleString();$('jSymbol').value=$('symbol').value;$('jDirection').value=direction;if(d||today<=-dayMax||extension>=3)status('bad','NO TRADE — RISK / BEHAVIOR GATE',problems.join(' • ')||'A hard gate failed.');else if(problems.length)status('warn','CAUTION — SETUP NOT FULLY CONFIRMED',problems.join(' • '));else status('good','SYSTEM-READY — MATH CHECK PASSED','Your stated rules and risk limits are internally consistent. This is not a prediction of a winning trade.');$('explain').innerHTML='<b>'+direction+':</b> trigger is the opening-range '+(direction==='LONG'?'high plus':'low minus')+' confirmation buffer. The stop is beyond your invalidation. Exposure is sized so the stop costs about <b>'+php(actual)+'</b>, capped by <b>'+lev+'×</b> and <b>'+php(cap)+'</b> available trading capital. Estimated net target after assumed fees: <b>'+php(net)+'</b>.';saveSettings()}
+$('calcBtn').onclick=calculate;
+function loadJournal(){try{return JSON.parse(localStorage.getItem(JKEY)||'[]')}catch(e){return[]}}function saveJournal(a){localStorage.setItem(JKEY,JSON.stringify(a));renderJournal()}
+function esc(s){return String(s||'').replace(/[&<>\"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;'}[m]))}
+function renderJournal(){const a=loadJournal(),b=$('journalBody');b.innerHTML='';let total=0,w=0,l=0,good=0;a.slice().reverse().forEach((t,r)=>{const i=a.length-1-r;total+=+t.pnl||0;if(t.pnl>0)w++;if(t.pnl<0)l++;if(t.grade==='GOOD TRADE')good++;const tr=document.createElement('tr');tr.innerHTML='<td>'+esc(t.date)+'</td><td>'+esc(t.symbol)+'</td><td>'+esc(t.direction)+'</td><td class="'+(t.pnl>=0?'pos':'neg')+'">'+php(+t.pnl)+'</td><td>'+esc(t.grade)+'</td><td>'+esc(t.notes)+'</td><td><button class="btn danger del" data-i="'+i+'" style="padding:5px 7px">Delete</button></td>';b.appendChild(tr)});b.querySelectorAll('.del').forEach(x=>x.onclick=()=>{const z=loadJournal();z.splice(+x.dataset.i,1);saveJournal(z)});$('journalStats').textContent=a.length?a.length+' trades • Net '+php(total)+' • Wins '+w+' • Losses '+l+' • Rule-following '+Math.round(good/a.length*100)+'%':'No trades logged yet.'}
+$('addTrade').onclick=()=>{const pnl=num('jPnl');if(!Number.isFinite(pnl)){alert('Enter P&L first.');return}const a=loadJournal();a.push({date:new Date().toLocaleString(),symbol:$('jSymbol').value.trim()||$('symbol').value,direction:$('jDirection').value,pnl,grade:$('jGrade').value,notes:$('jNotes').value});saveJournal(a);$('jPnl').value='';$('jNotes').value=''};$('clearJournal').onclick=()=>{if(confirm('Clear the entire journal on this browser?')){localStorage.removeItem(JKEY);renderJournal()}};
+const settingIds=['symbol','dailyOpen','orHigh','orLow','pullback','pullbackExtreme','confirmBuffer','stopBuffer','retestTolerance','rr','extension','balance','tradeCapital','riskPct','dailyRiskPct','todayPnl','leverage','feePct'];
+function saveSettings(){try{const d={direction};settingIds.forEach(id=>{if($(id))d[id]=$(id).value});document.querySelectorAll('.beh').forEach((el,i)=>d['beh'+i]=el.checked);localStorage.setItem(SKEY,JSON.stringify(d))}catch(e){}}
+function loadSettings(){try{const d=JSON.parse(localStorage.getItem(SKEY)||'{}');settingIds.forEach(id=>{if(d[id]!==undefined&&$(id))$(id).value=d[id]});document.querySelectorAll('.beh').forEach((el,i)=>{if(d['beh'+i]!==undefined)el.checked=!!d['beh'+i]});if(d.direction==='SHORT'||d.direction==='LONG'){direction=d.direction;$('longBtn').className='long'+(direction==='LONG'?' active':'');$('shortBtn').className='short'+(direction==='SHORT'?' active':'');$('dirBadge').textContent=direction+' bias'}}catch(e){}}
+settingIds.forEach(id=>{if($(id))$(id).addEventListener('change',saveSettings)});
+$('exportBackup').onclick=()=>{saveSettings();const payload={app:'Crypto Risk Desk',version:2,exportedAt:new Date().toISOString(),journal:loadJournal(),settings:JSON.parse(localStorage.getItem(SKEY)||'{}')},blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='crypto-risk-desk-backup-'+new Date().toISOString().slice(0,10)+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),500)};
+$('importBackup').onclick=()=>$('importFile').click();$('importFile').onchange=async e=>{const f=e.target.files&&e.target.files[0];if(!f)return;try{const d=JSON.parse(await f.text());if(!d||!Array.isArray(d.journal))throw new Error('Invalid backup');localStorage.setItem(JKEY,JSON.stringify(d.journal));if(d.settings)localStorage.setItem(SKEY,JSON.stringify(d.settings));loadSettings();updateBehavior();renderJournal();alert('Backup imported successfully.')}catch(err){alert('Import failed: '+err.message)}e.target.value=''};
+loadSettings();updateBehavior();renderJournal();
+</script>
+</body>
+</html>
