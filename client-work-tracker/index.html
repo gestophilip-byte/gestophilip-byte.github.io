@@ -4,241 +4,162 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#07111f">
-<title>Philip — Client Work & Payment Tracker</title>
-<style>
-:root{--bg:#07111f;--card:#0e1b2d;--card2:#13243a;--line:#263d5c;--text:#edf5ff;--muted:#91a8c5;--blue:#54aaff;--green:#5ce1b8;--yellow:#ffc861;--red:#ff7382;--shadow:0 18px 50px rgba(0,0,0,.28)}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 85% 0,#12305c 0,#07111f 37%,#050b14 100%);color:var(--text);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;min-height:100vh}
-button,input,select,textarea{font:inherit}.wrap{max-width:1540px;margin:auto;padding:24px}.top{display:flex;justify-content:space-between;gap:18px;align-items:center;margin-bottom:20px}.brand{display:flex;gap:13px;align-items:center}.logo{width:48px;height:48px;border-radius:15px;display:grid;place-items:center;font-weight:900;background:linear-gradient(135deg,#54aaff,#756bff)}h1{margin:0;font-size:clamp(1.35rem,2.2vw,2rem)}.sub{color:var(--muted);font-size:.9rem;margin-top:4px}.actions,.row-actions{display:flex;gap:8px;flex-wrap:wrap}
-.btn{border:1px solid var(--line);background:#102039;color:var(--text);padding:10px 13px;border-radius:11px;font-weight:750;cursor:pointer}.btn:hover{border-color:#47709e}.btn.primary{background:linear-gradient(135deg,#4aa8ff,#726dff);border:0}.btn.green{background:linear-gradient(135deg,#2dc99b,#4ebce9);border:0;color:#041219}.btn.red{color:#ff9aa5}.btn.small{padding:7px 9px;font-size:.78rem}
-.metrics{display:grid;grid-template-columns:repeat(5,1fr);gap:13px;margin-bottom:16px}.card{background:linear-gradient(180deg,rgba(20,37,60,.97),rgba(12,24,40,.97));border:1px solid rgba(100,136,178,.2);border-radius:18px;box-shadow:var(--shadow)}.metric{padding:17px}.metric .label{text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-size:.72rem;font-weight:800}.metric .value{font-size:clamp(1.5rem,2.8vw,2.25rem);font-weight:900;margin-top:5px;letter-spacing:-.04em}.metric .hint{font-size:.78rem;color:var(--muted);margin-top:4px}
-.tabs{display:flex;gap:8px;margin:0 0 14px;flex-wrap:wrap}.tab{background:#0d1a2c;border:1px solid var(--line);color:#b8cbe1;padding:9px 13px;border-radius:999px;cursor:pointer;font-weight:750}.tab.active{background:#17365b;color:white;border-color:#4c7eb6}
-.panel{display:none}.panel.active{display:block}.panel-card{padding:17px}.section-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:13px}.section-head h2{font-size:1.06rem;margin:0}.section-head p{margin:4px 0 0;color:var(--muted);font-size:.82rem}.filters{display:flex;gap:8px;flex-wrap:wrap}.field-inline{background:#081522;border:1px solid var(--line);border-radius:10px;color:var(--text);padding:9px 10px}
-.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:14px}table{border-collapse:collapse;width:100%;min-width:1120px}th,td{padding:12px 11px;border-bottom:1px solid rgba(75,105,140,.32);text-align:left;vertical-align:top}th{background:#102039;color:#9db4d0;font-size:.71rem;text-transform:uppercase;letter-spacing:.07em;position:sticky;top:0}td{font-size:.87rem}.company{font-weight:850}.smallmuted{font-size:.75rem;color:var(--muted);margin-top:3px}.money{font-weight:850;color:#9df0d5}.pill{display:inline-flex;padding:5px 8px;border-radius:999px;border:1px solid var(--line);font-size:.73rem;font-weight:800}.pill.active,.pill.paid{color:#8ff0cf}.pill.paused{color:#ffd684}.pill.done{color:#aebbc9}.pill.unpaid{color:#ffca75}.pill.open{color:#8cc7ff}
-.grid2{display:grid;grid-template-columns:1.65fr .75fr;gap:15px}.side{padding:16px}.side h3{font-size:.96rem;margin:0 0 10px}.item{padding:11px;border:1px solid var(--line);background:#0a1727;border-radius:12px;margin-bottom:8px}.item strong{display:block}.item p{margin:4px 0 0;color:#b8cbe1;font-size:.8rem;line-height:1.4}
-.empty{text-align:center;color:var(--muted);padding:28px}.notice{padding:11px 13px;border-radius:11px;background:rgba(255,200,97,.07);border:1px solid rgba(255,200,97,.22);color:#e7cb91;font-size:.79rem;line-height:1.45;margin-top:12px}
-dialog{width:min(780px,calc(100% - 26px));border:0;padding:0;border-radius:20px;background:#0d192a;color:var(--text);box-shadow:0 35px 100px rgba(0,0,0,.55)}dialog::backdrop{background:rgba(0,0,0,.65);backdrop-filter:blur(3px)}.modal-head{display:flex;justify-content:space-between;align-items:center;padding:18px 20px;border-bottom:1px solid var(--line)}.modal-head h3{margin:0}.modal-body{padding:20px}.form{display:grid;grid-template-columns:1fr 1fr;gap:13px}.field.full{grid-column:1/-1}.field label{display:block;font-size:.76rem;font-weight:800;color:#9fb5cf;margin-bottom:6px}.field input,.field select,.field textarea{width:100%;background:#081421;border:1px solid var(--line);border-radius:10px;color:var(--text);padding:10px 11px;outline:0}.field textarea{min-height:84px;resize:vertical}.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--blue)}.readonly{opacity:.78}.modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:16px}.calcbox{padding:10px 11px;background:#10243a;border:1px solid #2f5176;border-radius:10px;color:#9fe6cf;font-weight:850}
-.footer{text-align:center;color:#6f86a2;font-size:.76rem;margin-top:16px}.clock{font-variant-numeric:tabular-nums}
-@media(max-width:1100px){.metrics{grid-template-columns:repeat(2,1fr)}.grid2{grid-template-columns:1fr}.top{align-items:flex-start;flex-direction:column}}@media(max-width:650px){.wrap{padding:14px}.metrics{grid-template-columns:1fr}.form{grid-template-columns:1fr}.field.full{grid-column:auto}.actions .btn{flex:1}.section-head{align-items:flex-start;flex-direction:column}.filters{width:100%}.field-inline{width:100%}}
-</style>
+<title>Philip — Complete Client Work Dashboard</title>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 <div class="wrap">
 <header class="top">
-  <div class="brand"><div class="logo">PG</div><div><h1>Client Work & Payment Tracker</h1><div class="sub">Clients, time logs, earnings and payments — all in one dashboard.</div></div></div>
+  <div class="brand"><div class="logo">PG</div><div><h1>Client Work & Payment Dashboard</h1><div class="sub">Time tracking, clients, tasks, invoices, payments and earnings in one place.</div></div></div>
   <div class="actions">
-    <button class="btn" id="exportCsv">Export Work Logs</button>
-    <button class="btn" id="backupBtn">Backup JSON</button>
+    <button class="btn" id="exportCsv">Export CSV</button>
+    <button class="btn" id="backupBtn">Backup</button>
+    <button class="btn" id="importBtn">Import / Sync</button>
+    <input id="importFile" type="file" accept=".json,application/json" hidden>
     <button class="btn primary" id="addClientBtn">+ Add Client</button>
   </div>
 </header>
 
 <section class="metrics">
-  <div class="card metric"><div class="label">Hours Today</div><div class="value" id="mHours">0.00</div><div class="hint">All submitted sessions today</div></div>
-  <div class="card metric"><div class="label">Earned Today</div><div class="value" id="mToday">$0.00</div><div class="hint">Based on each client rate</div></div>
-  <div class="card metric"><div class="label">This Week</div><div class="value" id="mWeek">$0.00</div><div class="hint" id="mWeekHours">0.00 hours</div></div>
-  <div class="card metric"><div class="label">Unpaid Earnings</div><div class="value" id="mUnpaid">$0.00</div><div class="hint">Work not yet marked paid</div></div>
-  <div class="card metric"><div class="label">Active Clients</div><div class="value" id="mClients">0</div><div class="hint">Current accounts</div></div>
+  <div class="card metric"><div class="label">Hours Today</div><div class="value" id="mHours">0.00</div><div class="hint">Submitted sessions</div></div>
+  <div class="card metric"><div class="label">Earned Today</div><div class="value" id="mToday">$0.00</div><div class="hint">Today’s billable work</div></div>
+  <div class="card metric"><div class="label">This Week</div><div class="value" id="mWeek">$0.00</div><div class="hint">Weekly earnings</div></div>
+  <div class="card metric"><div class="label">This Month</div><div class="value" id="mMonth">$0.00</div><div class="hint">Monthly earnings</div></div>
+  <div class="card metric"><div class="label">This Year</div><div class="value" id="mYear">$0.00</div><div class="hint">Year-to-date billed</div></div>
+  <div class="card metric"><div class="label">Outstanding</div><div class="value" id="mUnpaid">$0.00</div><div class="hint">Billed minus payments</div></div>
 </section>
 
 <nav class="tabs">
-  <button class="tab active" data-tab="clients">Clients</button>
+  <button class="tab active" data-tab="overview">Overview</button>
+  <button class="tab" data-tab="clients">Clients</button>
   <button class="tab" data-tab="logs">Work Logs</button>
+  <button class="tab" data-tab="calendar">Calendar</button>
+  <button class="tab" data-tab="tasks">Tasks</button>
   <button class="tab" data-tab="payments">Payments</button>
+  <button class="tab" data-tab="invoices">Invoices</button>
+  <button class="tab" data-tab="analytics">Analytics</button>
+  <button class="tab" data-tab="sync">Data Sync</button>
 </nav>
 
-<section id="clients" class="panel active">
+<section id="overview" class="panel active">
+  <div class="grid3">
+    <div class="card side"><h3>Weekly Hour Targets</h3><div id="overviewTargets"></div></div>
+    <div class="card side"><h3>Open Tasks & Deadlines</h3><div id="overviewTasks"></div></div>
+    <div class="card side"><h3>Upcoming Payments</h3><div id="overviewPay"></div></div>
+  </div>
+</section>
+
+<section id="clients" class="panel">
 <div class="grid2">
   <div class="card panel-card">
-    <div class="section-head"><div><h2>Clients & Companies</h2><p>Edit rate/payment details separately from your daily work logs.</p></div><input id="clientSearch" class="field-inline" placeholder="Search client..."></div>
-    <div class="table-wrap">
-      <table><thead><tr><th>Company / Client</th><th>Rate</th><th>Payment Method</th><th>Schedule</th><th>Today</th><th>Unpaid</th><th>Status</th><th>Actions</th></tr></thead><tbody id="clientRows"></tbody></table>
-    </div>
+    <div class="section-head"><div><h2>Clients & Companies</h2><p>Hourly or fixed-rate work, weekly targets and payment details.</p></div><input id="clientSearch" class="field-inline" placeholder="Search client..."></div>
+    <div class="table-wrap"><table><thead><tr><th>Company / Client</th><th>Billing</th><th>Payment Method</th><th>Schedule</th><th>Weekly Target</th><th>Balance</th><th>Status</th><th>Actions</th></tr></thead><tbody id="clientRows"></tbody></table></div>
   </div>
-  <aside class="card side">
-    <h3>Quick Time Clock</h3>
-    <div id="clockList"></div>
-    <div class="notice">Use <b>Clock In</b> when you start. When you finish, press <b>Clock Out</b>. The tracker calculates the hours automatically and adds them to today’s total. You can also use <b>Log Work</b> to enter or correct a session manually.</div>
-  </aside>
+  <aside class="card side"><h3>Quick Time Clock</h3><div id="clockList"></div><div class="notice">Clock in when you start and clock out when you finish. The session is saved automatically and can be edited afterward for task details, breaks or billing amount.</div></aside>
 </div>
 </section>
 
 <section id="logs" class="panel">
 <div class="card panel-card">
-  <div class="section-head"><div><h2>Work Logs</h2><p>Every submitted session stays here instead of replacing yesterday’s hours.</p></div><div class="filters"><select id="logPeriod" class="field-inline"><option value="today">Today</option><option value="week">This Week</option><option value="month">This Month</option><option value="all">All Time</option></select><input id="logSearch" class="field-inline" placeholder="Search logs..."></div></div>
-  <div class="table-wrap"><table><thead><tr><th>Date</th><th>Client</th><th>Time</th><th>Break</th><th>Hours</th><th>Task</th><th>Rate</th><th>Earned</th><th>Payment</th><th>Actions</th></tr></thead><tbody id="logRows"></tbody></table></div>
+  <div class="section-head"><div><h2>Work Logs</h2><p>Permanent daily timesheet history for every client.</p></div><div class="filters"><select id="logPeriod" class="field-inline"><option value="today">Today</option><option value="week">This Week</option><option value="month">This Month</option><option value="year">This Year</option><option value="all">All Time</option></select><input id="logSearch" class="field-inline" placeholder="Search logs..."></div></div>
+  <div class="table-wrap"><table><thead><tr><th>Date</th><th>Client</th><th>Time</th><th>Break</th><th>Hours</th><th>Task</th><th>Billable</th><th>Actions</th></tr></thead><tbody id="logRows"></tbody></table></div>
+</div>
+</section>
+
+<section id="calendar" class="panel">
+<div class="card panel-card">
+  <div class="section-head"><div><h2 id="calTitle">Calendar</h2><p>Click any day to view the work sessions recorded on that date.</p></div><div class="filters"><button class="btn small" id="prevMonth">← Previous</button><button class="btn small" id="nextMonth">Next →</button></div></div>
+  <div class="calendar"><div class="cal-head">Sun</div><div class="cal-head">Mon</div><div class="cal-head">Tue</div><div class="cal-head">Wed</div><div class="cal-head">Thu</div><div class="cal-head">Fri</div><div class="cal-head">Sat</div></div>
+  <div id="calendarGrid" class="calendar"></div>
+</div>
+</section>
+
+<section id="tasks" class="panel">
+<div class="card panel-card">
+  <div class="section-head"><div><h2>Tasks & Deadlines</h2><p>Track what is next, what you are working on, and what is waiting on a client.</p></div><div class="filters"><select id="taskFilter" class="field-inline"><option value="all">All Statuses</option><option value="todo">To Do</option><option value="working">Working</option><option value="waiting">Waiting on Client</option><option value="done">Done</option></select><input id="taskSearch" class="field-inline" placeholder="Search tasks..."><button class="btn primary" id="addTaskBtn">+ Add Task</button></div></div>
+  <div class="table-wrap"><table><thead><tr><th>Task</th><th>Client</th><th>Status</th><th>Priority</th><th>Deadline</th><th>Actions</th></tr></thead><tbody id="taskRows"></tbody></table></div>
 </div>
 </section>
 
 <section id="payments" class="panel">
-<div class="grid2">
-  <div class="card panel-card">
-    <div class="section-head"><div><h2>Payment Tracking</h2><p>See unpaid work and mark individual sessions as paid.</p></div></div>
-    <div class="table-wrap"><table><thead><tr><th>Client</th><th>Unpaid Hours</th><th>Unpaid Amount</th><th>Method</th><th>Schedule</th><th>Next Payment</th><th>Action</th></tr></thead><tbody id="paymentRows"></tbody></table></div>
-  </div>
-  <aside class="card side"><h3>Recent Paid Work</h3><div id="paidList"></div></aside>
+<div class="card panel-card" style="margin-bottom:14px">
+  <div class="section-head"><div><h2>Client Balances</h2><p>Supports full and partial payments. Balance = total billed work − payments received.</p></div><button class="btn green" id="addPaymentBtn">+ Record Payment</button></div>
+  <div class="table-wrap"><table><thead><tr><th>Client</th><th>Total Billed</th><th>Paid</th><th>Balance</th><th>Method</th><th>Next Payment</th><th>Action</th></tr></thead><tbody id="paymentRows"></tbody></table></div>
+</div>
+<div class="card panel-card">
+  <div class="section-head"><div><h2>Payment Ledger</h2><p>Date, amount, method, transaction/reference number and notes.</p></div></div>
+  <div class="table-wrap"><table><thead><tr><th>Date</th><th>Client</th><th>Amount</th><th>Method</th><th>Reference</th><th>Notes</th><th>Actions</th></tr></thead><tbody id="ledgerRows"></tbody></table></div>
 </div>
 </section>
 
-<div class="footer">Philip Gesto • Personal work dashboard • Stored locally in this browser</div>
+<section id="invoices" class="panel">
+<div class="card panel-card">
+  <div class="section-head"><div><h2>Invoices & Pay Summaries</h2><p>Create a summary for any client and date range, including hours and billable amount.</p></div><button class="btn primary" id="addInvoiceBtn">+ Create Invoice</button></div>
+  <div class="table-wrap"><table><thead><tr><th>Invoice</th><th>Client</th><th>Period</th><th>Due Date</th><th>Amount</th><th>Status</th><th>Actions</th></tr></thead><tbody id="invoiceRows"></tbody></table></div>
+</div>
+</section>
+
+<section id="analytics" class="panel">
+<div class="grid2">
+  <div class="card panel-card"><div class="section-head"><div><h2>Monthly Earnings</h2><p>Last six months of billable work.</p></div></div><div id="monthChart" class="chart"></div></div>
+  <div class="card panel-card"><div class="section-head"><div><h2>Year Summary</h2><p>Current calendar year.</p></div></div><div id="analyticsSummary" class="summary"></div></div>
+</div>
+<div class="card panel-card" style="margin-top:14px"><div class="section-head"><div><h2>Earnings by Client</h2><p>Compare which clients generate the most billable work.</p></div></div><div id="clientChart" class="chart"></div></div>
+</section>
+
+<section id="sync" class="panel">
+<div class="grid2">
+  <div class="card panel-card"><div class="section-head"><div><h2>Backup & Device Sync</h2><p>Your private data stays in your browser instead of being committed to public GitHub.</p></div></div>
+    <div class="notice success">To use the tracker on another PC or phone, click <b>Backup</b>, move the JSON file to the other device, then use <b>Import / Sync</b>. The imported backup restores clients, work logs, tasks, invoices and payment history.</div>
+    <div class="row-actions" style="margin-top:12px"><button class="btn green" onclick="backup()">Download Full Backup</button><button class="btn" onclick="document.getElementById('importFile').click()">Import Backup</button></div>
+  </div>
+  <div class="card panel-card"><div class="section-head"><div><h2>Cloud Login</h2><p>Why this version does not publish your private data to GitHub.</p></div></div>
+    <div class="notice">A true live login/cloud database requires a private backend such as Supabase or Firebase with authentication and security rules. Putting private rates, payment history or API credentials directly in this public GitHub Pages repository would be unsafe. The current backup/import sync keeps those details private.</div>
+  </div>
+</div>
+</section>
+
+<div class="footer">Philip Gesto • Client Work & Payment Dashboard • Private data stored locally in this browser</div>
 </div>
 
-<dialog id="clientDialog">
-<form id="clientForm">
-<div class="modal-head"><h3 id="clientTitle">Add Client</h3><button type="button" class="btn small" data-close="clientDialog">✕</button></div>
-<div class="modal-body">
-<input type="hidden" id="cId">
-<div class="form">
-  <div class="field"><label>Company / Project</label><input id="cCompany" required></div>
-  <div class="field"><label>Client / Contact</label><input id="cContact"></div>
-  <div class="field"><label>Hourly Rate (USD) — editable</label><input id="cRate" type="number" min="0" step="0.01" required></div>
-  <div class="field"><label>Status</label><select id="cStatus"><option value="active">Active</option><option value="paused">Paused</option><option value="done">Completed</option></select></div>
-  <div class="field"><label>Payment Method — editable</label><input id="cMethod" placeholder="Remitly, Wise, PayPal, Bank..."></div>
-  <div class="field"><label>Payment Schedule — editable</label><input id="cSchedule" placeholder="Weekly, every 2 weeks, monthly..."></div>
-  <div class="field"><label>Next Payment Date</label><input id="cNextPay" type="date"></div>
-  <div class="field"><label>Expected Hours / Day</label><input id="cExpectedHours" type="number" min="0" step=".25" placeholder="4"></div>
-  <div class="field full"><label>Notes</label><textarea id="cNotes" placeholder="Client-specific notes or agreement details"></textarea></div>
-</div>
-<div class="modal-actions"><button type="button" class="btn" data-close="clientDialog">Cancel</button><button class="btn green">Save Client Details</button></div>
-</div>
-</form>
-</dialog>
+<dialog id="clientDialog"><form id="clientForm"><div class="modal-head"><h3 id="clientTitle">Add Client</h3><button type="button" class="btn small" data-close="clientDialog">✕</button></div><div class="modal-body"><input type="hidden" id="cId"><div class="form">
+<div class="field"><label>Company / Project</label><input id="cCompany" required></div><div class="field"><label>Client / Contact</label><input id="cContact"></div>
+<div class="field"><label>Billing Type</label><select id="cBilling"><option value="hourly">Hourly</option><option value="fixed">Fixed / Project Rate</option></select></div><div class="field"><label>Status</label><select id="cStatus"><option value="active">Active</option><option value="paused">Paused</option><option value="completed">Completed</option></select></div>
+<div class="field" id="hourlyField"><label>Hourly Rate (USD)</label><input id="cRate" type="number" min="0" step=".01"></div><div class="field hidden" id="fixedField"><label>Project / Fixed Rate (USD)</label><input id="cFixedRate" type="number" min="0" step=".01"></div>
+<div class="field"><label>Weekly Hour Target</label><input id="cWeeklyTarget" type="number" min="0" step=".25" placeholder="20"></div><div class="field"><label>Payment Method</label><input id="cMethod" placeholder="Remitly, Wise, PayPal, Bank..."></div>
+<div class="field"><label>Payment Schedule</label><input id="cSchedule" placeholder="Weekly, every 2 weeks, monthly..."></div><div class="field"><label>Next Payment Date</label><input id="cNextPay" type="date"></div>
+<div class="field full"><label>Notes / Agreement Details</label><textarea id="cNotes"></textarea></div></div>
+<div class="modal-actions"><button type="button" class="btn" data-close="clientDialog">Cancel</button><button class="btn green">Save Client</button></div></div></form></dialog>
 
-<dialog id="workDialog">
-<form id="workForm">
-<div class="modal-head"><h3 id="workTitle">Log Work</h3><button type="button" class="btn small" data-close="workDialog">✕</button></div>
-<div class="modal-body">
-<input type="hidden" id="wId">
-<div class="form">
-  <div class="field"><label>Client</label><select id="wClient" required></select></div>
-  <div class="field"><label>Work Date</label><input id="wDate" type="date" required></div>
-  <div class="field"><label>Time In</label><input id="wIn" type="time"></div>
-  <div class="field"><label>Time Out</label><input id="wOut" type="time"></div>
-  <div class="field"><label>Break (minutes)</label><input id="wBreak" type="number" min="0" step="1" value="0"></div>
-  <div class="field"><label>Manual Hours Override</label><input id="wManual" type="number" min="0" step=".01" placeholder="Optional"></div>
-  <div class="field full"><label>Calculated Hours</label><div class="calcbox" id="wCalculated">0.00 hours</div></div>
-  <div class="field full"><label>Task / Work Completed</label><textarea id="wTask" required placeholder="What did you work on?"></textarea></div>
-  <div class="field"><label>Payment Status</label><select id="wPaid"><option value="unpaid">Unpaid</option><option value="paid">Paid</option></select></div>
-  <div class="field"><label>Paid Date</label><input id="wPaidDate" type="date"></div>
-</div>
-<div class="modal-actions"><button type="button" class="btn" data-close="workDialog">Cancel</button><button class="btn green">Submit Work Log</button></div>
-</div>
-</form>
-</dialog>
+<dialog id="workDialog"><form id="workForm"><div class="modal-head"><h3 id="workTitle">Log Work</h3><button type="button" class="btn small" data-close="workDialog">✕</button></div><div class="modal-body"><input type="hidden" id="wId"><div class="form">
+<div class="field"><label>Client</label><select id="wClient" required></select></div><div class="field"><label>Work Date</label><input id="wDate" type="date" required></div>
+<div class="field"><label>Time In</label><input id="wIn" type="time"></div><div class="field"><label>Time Out</label><input id="wOut" type="time"></div>
+<div class="field"><label>Break (minutes)</label><input id="wBreak" type="number" min="0" value="0"></div><div class="field"><label>Manual Hours Override</label><input id="wManual" type="number" min="0" step=".01" placeholder="Optional"></div>
+<div class="field"><label>Billable Amount Override (USD)</label><input id="wBill" type="number" min="0" step=".01" placeholder="Optional for fixed/project work"></div><div class="field"><label>Calculated</label><div class="calcbox" id="wCalculated">0.00 hours • $0.00</div></div>
+<div class="field full"><label>Task / Work Completed</label><textarea id="wTask" required></textarea></div></div>
+<div class="modal-actions"><button type="button" class="btn" data-close="workDialog">Cancel</button><button class="btn green">Save Work Log</button></div></div></form></dialog>
 
-<script>
-const CLIENT_KEY='pg-tracker-clients-v2', LOG_KEY='pg-tracker-logs-v2', OLD_KEY='pg-client-work-tracker-v1';
-const $=id=>document.getElementById(id), uid=()=>crypto.randomUUID();
-const localDate=d=>{const x=d||new Date();return x.getFullYear()+'-'+String(x.getMonth()+1).padStart(2,'0')+'-'+String(x.getDate()).padStart(2,'0')};
-const money=n=>new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'}).format(Number(n)||0);
-const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-let clients=[],logs=[];
+<dialog id="taskDialog"><form id="taskForm"><div class="modal-head"><h3 id="taskTitle">Add Task</h3><button type="button" class="btn small" data-close="taskDialog">✕</button></div><div class="modal-body"><input type="hidden" id="tId"><div class="form">
+<div class="field"><label>Client</label><select id="tClient"></select></div><div class="field"><label>Task</label><input id="tTitle" required></div>
+<div class="field"><label>Status</label><select id="tStatus"><option value="todo">To Do</option><option value="working">Working</option><option value="waiting">Waiting on Client</option><option value="done">Done</option></select></div><div class="field"><label>Priority</label><select id="tPriority"><option value="low">Low</option><option value="normal">Normal</option><option value="high">High</option><option value="urgent">Urgent</option></select></div>
+<div class="field"><label>Deadline</label><input id="tDeadline" type="date"></div><div class="field full"><label>Notes</label><textarea id="tNotes"></textarea></div></div>
+<div class="modal-actions"><button type="button" class="btn" data-close="taskDialog">Cancel</button><button class="btn green">Save Task</button></div></div></form></dialog>
 
-function loadData(){
-  try{clients=JSON.parse(localStorage.getItem(CLIENT_KEY))||[];logs=JSON.parse(localStorage.getItem(LOG_KEY))||[]}catch{}
-  if(!clients.length){
-    let old=[];try{old=JSON.parse(localStorage.getItem(OLD_KEY))||[]}catch{}
-    if(old.length){
-      clients=old.map(r=>({id:r.id||uid(),company:r.company||'',contact:r.client||'',rate:Number(r.rate)||0,method:r.paymentMethod||'',schedule:r.paymentSchedule||'',nextPay:r.nextPaymentDate||'',expectedHours:'',status:r.status||'active',notes:''}));
-      old.filter(r=>r.timeIn||r.timeOut||Number(r.hours)>0).forEach(r=>logs.push({id:uid(),clientId:r.id,date:localDate(),timeIn:r.timeIn||'',timeOut:r.timeOut||'',breakMin:0,manualHours:Number(r.hours)||'',task:r.task||'Migrated work entry',paid:'unpaid',paidDate:'',createdAt:Date.now()}));
-    }else{
-      clients=[
-        {id:uid(),company:'Merch Cartel / Apparelology',contact:'Tony',rate:5,method:'',schedule:'',nextPay:'',expectedHours:4,status:'active',notes:''},
-        {id:uid(),company:'Digital Sea Creative',contact:'Brandon',rate:0,method:'',schedule:'',nextPay:'',expectedHours:'',status:'active',notes:''}
-      ];
-    }
-    persist();
-  }
-}
-function persist(){localStorage.setItem(CLIENT_KEY,JSON.stringify(clients));localStorage.setItem(LOG_KEY,JSON.stringify(logs));render()}
-function client(id){return clients.find(c=>c.id===id)}
-function calcTime(a,b,breakMin=0){if(!a||!b)return 0;let [ah,am]=a.split(':').map(Number),[bh,bm]=b.split(':').map(Number);let s=ah*60+am,e=bh*60+bm;if(e<s)e+=1440;return Math.max(0,(e-s-(Number(breakMin)||0))/60)}
-function hours(l){const m=Number(l.manualHours);return l.manualHours!==''&&!Number.isNaN(m)?m:calcTime(l.timeIn,l.timeOut,l.breakMin)}
-function earned(l){const c=client(l.clientId);return hours(l)*(c?Number(c.rate)||0:0)}
-function isToday(d){return d===localDate()}
-function weekStart(){const d=new Date();const day=(d.getDay()+6)%7;d.setHours(0,0,0,0);d.setDate(d.getDate()-day);return localDate(d)}
-function inPeriod(d,p){if(p==='all')return true;if(p==='today')return isToday(d);if(p==='week')return d>=weekStart()&&d<=localDate();if(p==='month')return d.slice(0,7)===localDate().slice(0,7);return true}
-function fmtDate(v){if(!v)return '—';return new Date(v+'T00:00:00').toLocaleDateString('en-PH',{month:'short',day:'numeric',year:'numeric'})}
-function fmtTime(v){if(!v)return '—';const [h,m]=v.split(':').map(Number);return new Date(2000,0,1,h,m).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'})}
-function openLogFor(cid){return logs.find(l=>l.clientId===cid&&l.date===localDate()&&l.timeIn&&!l.timeOut)}
-function todayHours(cid){return logs.filter(l=>l.clientId===cid&&isToday(l.date)).reduce((a,l)=>a+hours(l),0)}
-function unpaid(cid){return logs.filter(l=>l.clientId===cid&&l.paid!=='paid').reduce((a,l)=>a+earned(l),0)}
+<dialog id="paymentDialog"><form id="paymentForm"><div class="modal-head"><h3 id="paymentTitle">Record Payment</h3><button type="button" class="btn small" data-close="paymentDialog">✕</button></div><div class="modal-body"><input type="hidden" id="pId"><div class="form">
+<div class="field"><label>Client</label><select id="pClient" required></select></div><div class="field"><label>Payment Date</label><input id="pDate" type="date" required></div>
+<div class="field"><label>Amount Received (USD)</label><input id="pAmount" type="number" min="0" step=".01" required></div><div class="field"><label>Payment Method</label><input id="pMethod"></div>
+<div class="field"><label>Reference / Transaction Number</label><input id="pReference"></div><div class="field full"><label>Notes</label><textarea id="pNotes"></textarea></div></div>
+<div class="modal-actions"><button type="button" class="btn" data-close="paymentDialog">Cancel</button><button class="btn green">Save Payment</button></div></div></form></dialog>
 
-function render(){
-  const today=logs.filter(l=>isToday(l.date)), week=logs.filter(l=>inPeriod(l.date,'week'));
-  $('mHours').textContent=today.reduce((a,l)=>a+hours(l),0).toFixed(2);
-  $('mToday').textContent=money(today.reduce((a,l)=>a+earned(l),0));
-  $('mWeek').textContent=money(week.reduce((a,l)=>a+earned(l),0));
-  $('mWeekHours').textContent=week.reduce((a,l)=>a+hours(l),0).toFixed(2)+' hours';
-  $('mUnpaid').textContent=money(logs.filter(l=>l.paid!=='paid').reduce((a,l)=>a+earned(l),0));
-  $('mClients').textContent=clients.filter(c=>c.status==='active').length;
-  renderClients();renderLogs();renderPayments();renderClock();populateClientSelect();
-}
-function renderClients(){
-  const q=$('clientSearch').value.toLowerCase().trim();
-  const arr=clients.filter(c=>(c.company+' '+c.contact+' '+c.method).toLowerCase().includes(q));
-  $('clientRows').innerHTML=arr.length?arr.map(c=>`<tr>
-    <td><div class="company">${esc(c.company)}</div><div class="smallmuted">${esc(c.contact||'No contact')}</div></td>
-    <td class="money">${money(c.rate)}/hr</td>
-    <td>${esc(c.method||'Not set')}</td>
-    <td>${esc(c.schedule||'Not set')}${c.nextPay?'<div class="smallmuted">Next: '+fmtDate(c.nextPay)+'</div>':''}</td>
-    <td>${todayHours(c.id).toFixed(2)} hrs</td>
-    <td class="money">${money(unpaid(c.id))}</td>
-    <td><span class="pill ${c.status}">${c.status}</span></td>
-    <td><div class="row-actions"><button class="btn small green" onclick="newWork('${c.id}')">Log Work</button><button class="btn small" onclick="editClient('${c.id}')">Edit Details</button><button class="btn small red" onclick="deleteClient('${c.id}')">Delete</button></div></td>
-  </tr>`).join(''):'<tr><td colspan="8" class="empty">No clients found.</td></tr>';
-}
-function renderClock(){
-  const active=clients.filter(c=>c.status==='active');
-  $('clockList').innerHTML=active.length?active.map(c=>{const o=openLogFor(c.id);return `<div class="item"><strong>${esc(c.company)}</strong><p class="clock">${o?'Clocked in at '+fmtTime(o.timeIn):'Not clocked in'} • Today: ${todayHours(c.id).toFixed(2)} hrs</p><div class="row-actions" style="margin-top:8px">${o?'<button class="btn small green" onclick="clockOut(\''+c.id+'\')">Clock Out</button>':'<button class="btn small primary" onclick="clockIn(\''+c.id+'\')">Clock In</button>'}<button class="btn small" onclick="newWork('${c.id}')">Manual Log</button></div></div>`}).join(''):'<div class="empty">No active clients.</div>';
-}
-function renderLogs(){
-  const p=$('logPeriod').value,q=$('logSearch').value.toLowerCase().trim();
-  const arr=logs.filter(l=>inPeriod(l.date,p)).filter(l=>{const c=client(l.clientId);return ((c?c.company:'')+' '+l.task).toLowerCase().includes(q)}).sort((a,b)=>(b.date+(b.timeIn||'')).localeCompare(a.date+(a.timeIn||'')));
-  $('logRows').innerHTML=arr.length?arr.map(l=>{const c=client(l.clientId);return `<tr>
-    <td>${fmtDate(l.date)}</td><td><div class="company">${esc(c?c.company:'Deleted client')}</div></td>
-    <td>${fmtTime(l.timeIn)} → ${fmtTime(l.timeOut)}${l.timeIn&&!l.timeOut?'<div class="smallmuted"><span class="pill open">Open</span></div>':''}</td>
-    <td>${Number(l.breakMin)||0} min</td><td>${hours(l).toFixed(2)}</td><td>${esc(l.task||'—')}</td>
-    <td>${money(c?c.rate:0)}/hr</td><td class="money">${money(earned(l))}</td>
-    <td><span class="pill ${l.paid==='paid'?'paid':'unpaid'}">${l.paid||'unpaid'}</span>${l.paidDate?'<div class="smallmuted">'+fmtDate(l.paidDate)+'</div>':''}</td>
-    <td><div class="row-actions"><button class="btn small" onclick="editWork('${l.id}')">Edit</button><button class="btn small red" onclick="deleteWork('${l.id}')">Delete</button></div></td>
-  </tr>`}).join(''):'<tr><td colspan="10" class="empty">No work logs for this period.</td></tr>';
-}
-function renderPayments(){
-  const arr=clients.filter(c=>logs.some(l=>l.clientId===c.id&&l.paid!=='paid'));
-  $('paymentRows').innerHTML=arr.length?arr.map(c=>{const ul=logs.filter(l=>l.clientId===c.id&&l.paid!=='paid');return `<tr>
-    <td><div class="company">${esc(c.company)}</div></td><td>${ul.reduce((a,l)=>a+hours(l),0).toFixed(2)}</td><td class="money">${money(ul.reduce((a,l)=>a+earned(l),0))}</td>
-    <td>${esc(c.method||'Not set')}</td><td>${esc(c.schedule||'Not set')}</td><td>${fmtDate(c.nextPay)}</td>
-    <td><button class="btn small green" onclick="markClientPaid('${c.id}')">Mark All Paid</button></td></tr>`}).join(''):'<tr><td colspan="7" class="empty">Nothing unpaid right now.</td></tr>';
-  const paid=logs.filter(l=>l.paid==='paid').sort((a,b)=>(b.paidDate||b.date).localeCompare(a.paidDate||a.date)).slice(0,8);
-  $('paidList').innerHTML=paid.length?paid.map(l=>{const c=client(l.clientId);return `<div class="item"><strong>${esc(c?c.company:'Client')}</strong><p>${money(earned(l))} • ${hours(l).toFixed(2)} hrs • Paid ${fmtDate(l.paidDate||l.date)}</p></div>`}).join(''):'<div class="empty">No paid entries yet.</div>';
-}
-function populateClientSelect(){const cur=$('wClient').value;$('wClient').innerHTML=clients.map(c=>`<option value="${c.id}">${esc(c.company)}</option>`).join('');if(clients.some(c=>c.id===cur))$('wClient').value=cur}
+<dialog id="invoiceDialog"><form id="invoiceForm"><div class="modal-head"><h3>Create Invoice / Pay Summary</h3><button type="button" class="btn small" data-close="invoiceDialog">✕</button></div><div class="modal-body"><input type="hidden" id="iId"><div class="form">
+<div class="field"><label>Invoice Number</label><input id="iNumber" required></div><div class="field"><label>Client</label><select id="iClient" required></select></div>
+<div class="field"><label>Period Start</label><input id="iStart" type="date" required></div><div class="field"><label>Period End</label><input id="iEnd" type="date" required></div>
+<div class="field"><label>Due Date</label><input id="iDue" type="date"></div><div class="field"><label>Invoice Total</label><div class="calcbox" id="invoicePreview">0.00 hours • $0.00</div></div>
+<div class="field full"><label>Notes</label><textarea id="iNotes" placeholder="Payment instructions, thank-you note, etc."></textarea></div></div>
+<div class="modal-actions"><button type="button" class="btn" data-close="invoiceDialog">Cancel</button><button class="btn green">Create Invoice</button></div></div></form></dialog>
 
-function resetClient(){['cId','cCompany','cContact','cMethod','cSchedule','cNextPay','cExpectedHours','cNotes'].forEach(id=>$(id).value='');$('cRate').value='';$('cStatus').value='active'}
-function editClient(id){const c=client(id);if(!c)return;resetClient();$('clientTitle').textContent='Edit Client Details';$('cId').value=c.id;$('cCompany').value=c.company;$('cContact').value=c.contact||'';$('cRate').value=c.rate;$('cMethod').value=c.method||'';$('cSchedule').value=c.schedule||'';$('cNextPay').value=c.nextPay||'';$('cExpectedHours').value=c.expectedHours||'';$('cStatus').value=c.status||'active';$('cNotes').value=c.notes||'';$('clientDialog').showModal()}
-function deleteClient(id){if(!confirm('Delete this client? Existing work logs will remain but the client name/rate will no longer be available.'))return;clients=clients.filter(c=>c.id!==id);persist()}
-$('addClientBtn').onclick=()=>{resetClient();$('clientTitle').textContent='Add Client';$('clientDialog').showModal()};
-$('clientForm').onsubmit=e=>{e.preventDefault();const id=$('cId').value||uid();const obj={id,company:$('cCompany').value.trim(),contact:$('cContact').value.trim(),rate:Number($('cRate').value)||0,method:$('cMethod').value.trim(),schedule:$('cSchedule').value.trim(),nextPay:$('cNextPay').value,expectedHours:$('cExpectedHours').value,notes:$('cNotes').value.trim(),status:$('cStatus').value};const i=clients.findIndex(c=>c.id===id);if(i>=0)clients[i]=obj;else clients.push(obj);persist();$('clientDialog').close()};
+<dialog id="dayDialog"><div class="modal-head"><h3 id="dayTitle">Work Day</h3><button type="button" class="btn small" data-close="dayDialog">✕</button></div><div class="modal-body" id="dayDetails"></div></dialog>
 
-function resetWork(){['wId','wIn','wOut','wManual','wTask','wPaidDate'].forEach(id=>$(id).value='');$('wDate').value=localDate();$('wBreak').value=0;$('wPaid').value='unpaid';syncCalc()}
-function newWork(cid){resetWork();populateClientSelect();if(cid)$('wClient').value=cid;$('workTitle').textContent='Log Work';$('workDialog').showModal()}
-function editWork(id){const l=logs.find(x=>x.id===id);if(!l)return;resetWork();populateClientSelect();$('workTitle').textContent='Edit Work Log';$('wId').value=l.id;$('wClient').value=l.clientId;$('wDate').value=l.date;$('wIn').value=l.timeIn||'';$('wOut').value=l.timeOut||'';$('wBreak').value=l.breakMin||0;$('wManual').value=l.manualHours??'';$('wTask').value=l.task||'';$('wPaid').value=l.paid||'unpaid';$('wPaidDate').value=l.paidDate||'';syncCalc();$('workDialog').showModal()}
-function deleteWork(id){if(confirm('Delete this work log?')){logs=logs.filter(l=>l.id!==id);persist()}}
-function syncCalc(){const m=$('wManual').value;const h=m!==''?Number(m)||0:calcTime($('wIn').value,$('wOut').value,$('wBreak').value);$('wCalculated').textContent=h.toFixed(2)+' hours'}
-['wIn','wOut','wBreak','wManual'].forEach(id=>$(id).addEventListener('input',syncCalc));
-$('workForm').onsubmit=e=>{e.preventDefault();const id=$('wId').value||uid();const obj={id,clientId:$('wClient').value,date:$('wDate').value,timeIn:$('wIn').value,timeOut:$('wOut').value,breakMin:Number($('wBreak').value)||0,manualHours:$('wManual').value===''?'':Number($('wManual').value),task:$('wTask').value.trim(),paid:$('wPaid').value,paidDate:$('wPaid').value==='paid'?($('wPaidDate').value||localDate()):'',createdAt:Date.now()};const i=logs.findIndex(l=>l.id===id);if(i>=0)logs[i]=obj;else logs.push(obj);persist();$('workDialog').close()};
-
-function clockIn(cid){if(openLogFor(cid))return;const now=new Date();logs.push({id:uid(),clientId:cid,date:localDate(now),timeIn:String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0'),timeOut:'',breakMin:0,manualHours:'',task:'Work session',paid:'unpaid',paidDate:'',createdAt:Date.now()});persist()}
-function clockOut(cid){const l=openLogFor(cid);if(!l)return;const now=new Date();l.timeOut=String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0');if(l.task==='Work session')l.task='Work session — edit task details';persist();editWork(l.id)}
-function markClientPaid(cid){const u=logs.filter(l=>l.clientId===cid&&l.paid!=='paid');if(!u.length)return;if(!confirm('Mark all unpaid work for this client as paid today?'))return;u.forEach(l=>{l.paid='paid';l.paidDate=localDate()});persist()}
-
-document.querySelectorAll('[data-close]').forEach(b=>b.onclick=()=>$(b.dataset.close).close());
-document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));b.classList.add('active');$(b.dataset.tab).classList.add('active')});
-$('clientSearch').addEventListener('input',renderClients);$('logSearch').addEventListener('input',renderLogs);$('logPeriod').addEventListener('change',renderLogs);
-
-$('exportCsv').onclick=()=>{const h=['Date','Company','Contact','Time In','Time Out','Break Minutes','Hours','Task','Hourly Rate USD','Earned USD','Payment Status','Paid Date'];const v=logs.map(l=>{const c=client(l.clientId);return[l.date,c?.company||'',c?.contact||'',l.timeIn,l.timeOut,l.breakMin,hours(l),l.task,c?.rate||0,earned(l),l.paid,l.paidDate]});download('philip-work-logs.csv',[h,...v].map(r=>r.map(x=>'"'+String(x??'').replaceAll('"','""')+'"').join(',')).join('\n'),'text/csv')};
-$('backupBtn').onclick=()=>download('philip-client-tracker-backup.json',JSON.stringify({clients,logs,exportedAt:new Date().toISOString()},null,2),'application/json');
-function download(name,data,type){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([data],{type}));a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),500)}
-loadData();render();
-</script>
-</body></html>
+<script src="app.js"></script>
+</body>
+</html>
