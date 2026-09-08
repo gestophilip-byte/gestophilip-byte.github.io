@@ -109,12 +109,26 @@
 
 <section id="sync" class="panel">
 <div class="grid2">
-  <div class="card panel-card"><div class="section-head"><div><h2>Backup & Device Sync</h2><p>Your private data stays in your browser instead of being committed to public GitHub.</p></div></div>
-    <div class="notice success">To use the tracker on another PC or phone, click <b>Backup</b>, move the JSON file to the other device, then use <b>Import / Sync</b>. The imported backup restores clients, work logs, tasks, invoices and payment history.</div>
-    <div class="row-actions" style="margin-top:12px"><button class="btn green" onclick="backup()">Download Full Backup</button><button class="btn" onclick="document.getElementById('importFile').click()">Import Backup</button></div>
+  <div class="card panel-card">
+    <div class="section-head"><div><h2>Google Sheets Cloud Sync</h2><p>Use your private Google Sheet as the shared database across PC, laptop and phone.</p></div></div>
+    <div class="form">
+      <div class="field full"><label>Apps Script Web App URL</label><input id="cloudUrl" placeholder="https://script.google.com/macros/s/.../exec"></div>
+      <div class="field full"><label>Private API Token</label><input id="cloudToken" type="password" placeholder="Copy the api_token from the private Sheet → Settings tab"></div>
+      <div class="field full"><label><input id="cloudAuto" type="checkbox" style="width:auto;margin-right:8px"> Automatic cloud sync after every saved change</label></div>
+    </div>
+    <div class="row-actions" style="margin-top:12px">
+      <button class="btn green" id="saveCloudBtn">Save Connection</button>
+      <button class="btn" id="pullCloudBtn">Pull from Google Sheets</button>
+      <button class="btn" id="pushCloudBtn">Push to Google Sheets</button>
+    </div>
+    <div id="cloudStatus" class="notice" style="margin-top:12px">Cloud sync is not configured on this browser yet.</div>
+    <div class="notice success" style="margin-top:10px">Once connected, you can clock in on one device and pull the same records on another. With automatic sync enabled, saved changes are sent to Google Sheets automatically.</div>
   </div>
-  <div class="card panel-card"><div class="section-head"><div><h2>Cloud Login</h2><p>Why this version does not publish your private data to GitHub.</p></div></div>
-    <div class="notice">A true live login/cloud database requires a private backend such as Supabase or Firebase with authentication and security rules. Putting private rates, payment history or API credentials directly in this public GitHub Pages repository would be unsafe. The current backup/import sync keeps those details private.</div>
+  <div class="card panel-card">
+    <div class="section-head"><div><h2>Backup & Recovery</h2><p>Keep an offline backup in addition to cloud sync.</p></div></div>
+    <div class="notice">Your Google Sheet is the shared cloud database. JSON Backup is still useful if you ever want an offline copy or need to restore data manually.</div>
+    <div class="row-actions" style="margin-top:12px"><button class="btn green" onclick="backup()">Download Full Backup</button><button class="btn" onclick="document.getElementById('importFile').click()">Import Backup</button></div>
+    <div class="notice" style="margin-top:10px"><b>One-time Google step:</b> deploy the Apps Script bridge as a Web app, then paste its <code>/exec</code> URL above. The script source is already stored in this GitHub repository under <code>client-work-tracker/google-apps-script/Code.gs</code>.</div>
   </div>
 </div>
 </section>
