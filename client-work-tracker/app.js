@@ -149,7 +149,7 @@ function resetInvoice(){['iId','iNumber','iStart','iEnd','iDue','iNotes'].forEac
 function invoiceCalc(cid,start,end){const ls=logs.filter(l=>l.clientId===cid&&l.date>=start&&l.date<=end);return {logs:ls,hours:ls.reduce((a,l)=>a+hours(l),0),amount:ls.reduce((a,l)=>a+earned(l),0)}}
 function syncInvoicePreview(){const r=invoiceCalc($('iClient').value,$('iStart').value||'0000',$('iEnd').value||'9999');$('invoicePreview').textContent=r.hours.toFixed(2)+' hours • '+money(r.amount)}
 function downloadInvoice(id){const i=invoices.find(x=>x.id===id);if(!i)return;const c=client(i.clientId),r=invoiceCalc(i.clientId,i.start,i.end);let body='INVOICE '+i.number+'\n\nClient: '+(c?.company||'')+'\nContact: '+(c?.contact||'')+'\nPeriod: '+fmtDate(i.start)+' - '+fmtDate(i.end)+'\nDue: '+fmtDate(i.dueDate)+'\n\nHours: '+r.hours.toFixed(2)+'\nAmount Due: '+money(i.amount)+'\nPayment Method: '+(c?.method||'')+'\n\nNotes: '+(i.notes||'')+'\n';download(i.number+'.txt',body,'text/plain')}
-function markInvoicePaid(id){const i=invoices.find(x=>x.id===id);if(!i)return;i.status='paid';persist()}
+function markInvoicePaid(id){const i=invoices.find(x=>x.id===id);if(!i)return;i.status='paid';if(!payments.some(p=>p.invoiceId===id)){const cl=client(i.clientId);payments.push({id:uid(),invoiceId:id,clientId:i.clientId,date:localDate(),amount:Number(i.amount)||0,method:cl?.method||'',reference:i.number,notes:'Payment recorded from paid invoice'})}persist()}
 function deleteInvoice(id){if(confirm('Delete this invoice?')){invoices=invoices.filter(i=>i.id!==id);persist()}}
 
 function download(name,data,type){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([data],{type}));a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),500)}
